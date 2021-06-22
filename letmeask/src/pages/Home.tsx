@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
-import { auth, firebase } from '../services/firebase';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
 
-import '../styles/auth.scss';
 import { Button } from '../components/Button';
+import { useAuth } from '../hooks/useAuth';
+
+import '../styles/auth.scss';
 
 // Wepack (snowpack, vite, ...)
 
@@ -16,13 +15,12 @@ import { Button } from '../components/Button';
 
 export function Home(){
   const history = useHistory();
+  const { user, signInWithGoogle } = useAuth();
 
-  function handleCreateRoom() {
-    const provider = new firebase.auth.GithubAuthProvider();
-
-    auth.signInWithPopup(provider).then(result => {
-      console.log(result);
-    });
+  async function handleCreateRoom() {
+    if(!user){
+      await signInWithGoogle();
+    }
 
     history.push('/rooms/new');
   }
