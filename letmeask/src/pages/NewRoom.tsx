@@ -8,7 +8,7 @@ import logoImg from '../assets/images/logo.svg';
 
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
-import { useAuth } from '../hooks/useAuth';
+// import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
 
 // Webpack (snowpack, vite, ...)
@@ -16,7 +16,7 @@ import { database } from '../services/firebase';
 // Webpack = module bundler
 
 export function NewRoom(){
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState('');
 
